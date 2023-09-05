@@ -1,0 +1,154 @@
+body{
+    box-sizing: 0;
+    margin: 0;
+    padding: 0;
+}
+.login-form{
+    width: 450px;
+    max-width: 60%;
+    margin: 10% auto;
+}
+.question-form{
+    width: 500px;
+    max-width: 70%;
+}
+.logo-sizing{
+    height: 30px;
+    width: 30px;
+}
+.logo-sizing2{
+  height: 40px;
+  width: 40px;
+}
+shadow{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.bg-footer{
+    background: #400b94;
+}
+.text-header{
+    color: #f953c6;  /* fallback for old browsers */
+    color: -webkit-linear-gradient(to right, #b91d73, #f953c6);  /* Chrome 10-25, Safari 5.1-6 */
+    color: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+}
+.bg-header{
+    background: #f953c6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b91d73, #f953c6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+}
+.bg-orange{
+    background: #FF512F;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F09819, #FF512F);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F09819, #FF512F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+.list-style-remove{
+    list-style: none;
+}
+.remove-decorate{
+    text-decoration: none;
+}
+.float_this{
+    float: right;
+}
+.question_container{
+  position: absolute;
+  z-index: 1;
+  left: 180px;
+  display: none;
+}
+.col-3{
+  height: 100%;
+}
+.scroll_blur{
+    opacity: 0.08;
+}
+
+.container-control {
+    display: flex;
+    height: 100vh;
+  }
+
+  /* Fixed div */
+  .fixed {
+    flex: 0 0 300px;
+    overflow: hidden;
+    padding: 10px;
+  }
+
+  /* Scrollable divs */
+  .scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(245, 245, 245, 0.822);
+  }
+  .review{
+    position: absolute;
+    min-width: 350px;
+    max-width: 660px;
+    left: 6px;
+    margin: 0;
+  }
+  .index{
+    z-index: 1;
+  }
+  .result-style{
+    width: 500px;
+    max-width: 70%;
+    margin: 0 auto;
+    margin-top: 15%;
+    background: rgba(245, 245, 245, 0.342);
+  }
+  .result-style hr{
+    background: #f953c6;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b91d73, #f953c6);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  }
+  .btn-li{
+    border: 1px solid black;
+    padding: 1px;
+    text-align: center;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .floatT{
+    float: right;
+  }
+
+  .logout-style{
+    transform: rotate(180deg);
+  }
+  .disabled {
+    pointer-events: none; /* Disable click events */
+    color: black;          /* Change the color to indicate disabled state */
+    text-decoration: none;
+  }
+@media (max-width: 768px){
+    .col-3{
+      height: 100%;
+        font-size: 0.68rem;
+    }
+    .col-3 strong{
+        font-size: 0.64rem;
+    }
+    .col{
+        font-size: 0.8rem;
+    }
+    .question_container{
+        left: 70px;
+      }
+      .login-form{
+        margin-top: 30%;
+    }
+    .floatT{
+        float: none;
+    }
+    li em{
+      font-size: 0.7rem;
+    }
+    .size-r{
+      font-size: 0.95rem;
+    }
+}

@@ -1,0 +1,62 @@
+<%- include('partials/header.ejs') %>
+<div class="container-control">
+   <div class="col-3 bg-orange pt-5 px-0 fixed">
+    <br>
+    <br>
+    <br>
+      <ul class="list-style-remove bg-white rounded w-75 p-3 ml-3 ml-lg-4 shadow">
+         <% if(userLoggedIn && userLoggedIn.isAdmin==false) {%>
+            <li class="text-center"><i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i></li>
+            <li class="text-center"><em><%= userLoggedIn.username %></em></li>
+            <li class="text-center"><strong> Department: </strong><span class="department"><%= userLoggedIn.department %></span></li>  
+            <li class="text-center"><strong> Time: </strong><span>15 Minutes</span></li>
+            <% }else{ %>
+                <li class="text-center"><i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i></li>
+                <li class="text-center"><em>Admin</em></li> 
+                <li class="text-center"><strong><em><%= userLoggedIn.username %></em></strong></li>
+            <% } %>    
+    </ul>
+    <% if(userLoggedIn && userLoggedIn.isAdmin==false){ %>
+    <div class="ml-1 container">
+      <a href="/biologyquestion/exam" class="text-light bio-button"><strong>BIO101 Question</strong></a>
+      <br>      
+       <a href="/mathsquestion/exam" class="text-light mth-button"><strong>MTH101 Question</strong></a>
+       <br>
+       <a href="/chemistryquestion/exam" class="text-light chm-button"><strong>CHM101 Question</strong></a>
+       <br>
+       <a href="/physicsquestion/exam" class="text-light phy-button"><strong>PHY101 Question</strong></a>
+       <br>
+       <a href="/gnsquestion/exam" class="text-light gns-button"><strong>GNS101 Question</strong></a>
+      <br>
+    </div>
+    <% } %>
+   </div>
+   
+<div class="py-5 px-2 m-5 col-6 container">
+   <div class="container">
+      <% if(error && error.length > 0){%>
+        <div class="alert alert-danger text-center" role="alert">
+          <%= error %>
+        </div>
+      <% } else if(success && success.length > 0){%>
+      <div class="alert alert-success text-center" role="alert">
+        <%= success %>
+      </div>
+       <% }else{ %>
+    
+      <%} %>
+    </div>
+   <div class="container mt-4">
+      <h4 class=""><b>READ THE INSTRUCTIONS DOWN BELOW</b></h2>
+   </div>
+   <p class="my-lg-3 mr-lg-5 py-lg-3 pr-lg-5 container">
+      This examination assessment consists of 15 questions and it is to be attempted within 15 minutes,each question is to be attempted. Failure to click the submit button  after 15 minutes leads to an automatic submission by the computer,you still have to click the submit button to submit your work, Good luck.
+   </p>
+</div>
+
+<div class="col-3 bg-orange pt-5 fixed">
+  
+</div>
+</div>
+
+<%- include('partials/footerResult.ejs') %>

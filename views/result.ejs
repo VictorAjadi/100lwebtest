@@ -1,0 +1,58 @@
+<%- include('partials/header.ejs') %>
+<div class="my-5 text-center pt-3 container">
+    <% if(error && error.length > 0){%>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } else if(success && success.length > 0){%>
+    <div class="alert alert-success" role="alert">
+      <%= success %>
+    </div>
+     <% }else{ %>
+  
+    <%} %>
+  </div>
+<div class="bg-light-50 p-3 mx-auto shadow">
+    <form action="/exam/generate-pdf/phy/result" method="post">
+        <div class="container pt-3">
+            <h4 class="text-center pb-4"><span><img src="https://hgbcogbomoso.org/wp-content/uploads/2019/12/logosmall.png" class="logo-sizing2" alt=""></span><b> Download Student result</b></h4>
+            <div class="form-group">
+                <input id="my-input" class="form-control" type="text" name="username" required placeholder="Your Name">
+            </div>
+            <button type="submit" class="bg-header border-0 text-light rounded w-100 my-2 px-2 py-1"><b>DOWNLOAD PHY RESULT HERE</b></button> 
+        </div>
+    </form>
+    <form action="/exam/generate-pdf/chm/result" method="post">
+        <div class="container pt-3">
+            <div class="form-group">
+                <input id="my-input" class="form-control" type="text" name="username" required placeholder="Your Name">
+            </div>
+            <button type="submit" class="bg-header border-0 text-light rounded w-100 my-2 px-2 py-1"><b>DOWNLOAD CHM RESULT HERE</b></button> 
+        </div>
+    </form>
+    <form action="/exam/generate-pdf/bio/result" method="post">
+        <div class="container pt-3">
+            <div class="form-group">
+                <input id="my-input" class="form-control" type="text" name="username" required placeholder="Your Name">
+            </div>
+            <button type="submit" class="bg-header border-0 text-light rounded w-100 my-2 px-2 py-1"><b>DOWNLOAD BIO RESULT HERE</b></button> 
+        </div>
+    </form>
+    <form action="/exam/generate-pdf/mth/result" method="post">
+        <div class="container pt-3">
+            <div class="form-group">
+                <input id="my-input" class="form-control" type="text" name="username" required placeholder="Your Name">
+            </div>
+            <button type="submit" class="bg-header border-0 text-light rounded w-100 my-2 px-2 py-1"><b>DOWNLOAD MTH RESULT HERE</b></button> 
+        </div>
+    </form>
+    <form action="/exam/generate-pdf/gns/result" method="post">
+        <div class="container pt-3">
+            <div class="form-group">
+                <input id="my-input" class="form-control" type="text" name="username" required placeholder="Your Name">
+            </div>
+            <button type="submit" class="bg-header border-0 text-light rounded w-100 my-2 px-2 py-1"><b>DOWNLOAD GNS RESULT HERE</b></button> 
+        </div>
+    </form>
+</div>
+<%- include('partials/footer.ejs') %>

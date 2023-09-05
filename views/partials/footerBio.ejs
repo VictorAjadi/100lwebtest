@@ -1,0 +1,38 @@
+  <script src="/js/bioscript.js"></script>
+   <script>
+    var N_question=30;
+    function calculate_score() {
+      // Initialize the score
+      var score = 0;
+      var mini;
+      // Loop through each question
+      for (var i = 0; i < N_question; i++) {
+        mini=i;
+        // Get the selected answer for the current question
+        var selectedAnswer = $('input[name="q' + i + '"]:checked');
+        var question= $('input[name="q' + i + '"]').attr('class');
+        // If an answer is selected and its value is "1", increment the score
+        if (selectedAnswer && selectedAnswer.val()==question) {
+          score++;
+        }
+      }
+for(var i=0;i<N_question;i++){
+  $('input[name="q' + i + '"]:checked').attr('checked','checked'); 
+}  
+//append question into review
+$('.append-here').remove();
+$('.redo-append-here').append('<ol class="append-here"></ol>');
+$('.append-here').append($('.question_dump').html());
+$('.question_dump').remove();
+      // Display the score
+      if($('.minutes').text() >= 15){
+     $('input[type="radio"]').attr('disabled', 'disabled');
+   };
+      $('input[type="radio"]').attr('disabled', 'disabled');
+      $('.review').addClass('index');
+      $('.blur-this').addClass('scroll_blur');
+      $('.review').slideDown('slow');
+    };
+   </script>
+</body>
+</html>

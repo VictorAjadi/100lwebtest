@@ -1,0 +1,124 @@
+<%- include('partials/header.ejs') %>
+<div class="container-control">
+   <div class="col-3 bg-orange pt-5 px-0 blur-this fixed">
+    <br>
+    <br>
+    <br>
+      <ul class="list-style-remove bg-white rounded w-75 p-3 ml-3 ml-lg-4 shadow">
+        <li class="text-center"><i class="fa fa-user-circle-o fa-4x" aria-hidden="true"></i></li>
+        <li class="text-center"><em><%= userLoggedIn.username %></em></li>
+        <li class="text-center"><strong> Department: </strong><span class="department"><%= userLoggedIn.department %></span></li>  
+        <li class="text-center"><strong> Course: </strong><span class="course">PHY101</span></li>
+        <li class="text-center"><strong> Time: </strong><span>15 Minutes</span></li>
+    </ul>
+    <div class="d-lg-none d-xl-none">
+      <a class="finish_button rounded text-light w-50 ml-5" onclick="calculate_score()"><strong>finish attempt</strong></a>
+    </div>
+   </div>
+   
+   <div class="pt-5 col container px-2 scrollable move">
+    <br>
+    <br>
+    <br>
+    <div class="container px-2 w-50 border rounded py-2 question_container index">
+      <h2>Student declaration</h2>
+      <p>
+      By attempting this exam, I acknowledge that:
+      </p>
+      <ul>
+          <li>I agree to be bound by the university’s rules, codes of conduct, and other policies relating to examinations.</li>
+          <li>I have read and understand the examination conduct requirements for this exam.</li>
+          <li>I am aware of the university’s rules regarding misconduct during examinations.</li>
+          <li>I am not in possession of, nor do I have access to, any unauthorised material during this examination.</li>
+      </ul>
+      <div>
+          <input type="checkbox" id="checkbox" required>
+          <button class="bg-header text-light border-0 rounded text-center pb-1 px-2 float_this instruction_button"><strong>confirm</strong></button>
+      </div>
+  </div>
+
+  <div class="shadow bg-light-50 review scrollable">
+    <div>
+      <button class="rounded border-0 w-auto text-light bg-header"><strong>Review,Scroll down to submit</strong></button>
+      <i class="fa fa-times float_this mx-3 my-1 cancel" aria-hidden="true"></i>
+    </div>
+    <div class="redo-append-here">
+      <ol class="append-here">
+
+     </ol>
+    </div>
+        <button type="submit" class="bg-header w-50 py-2 rounded border-0 text-light float_this phy_submit_exam"><strong>Submit</strong></button>
+  </div>
+
+  <h2 class="text-center blur-this"><b>START EXAM</b></h2>
+  <div class="reput_question">
+    <ol class="blur-this question_dump">
+      <%phyExam.slice(0,30).forEach((phyExams, i)=> { %>
+       <div id="div<%= i %>">
+         <li>
+           <p ><%= phyExams.question %></p>
+             <div>
+               <label><input type="radio" name="q<%=  i  %>"  value="<%= phyExams.optionA %>"  class="<%= phyExams.answer %>">(a) <%= phyExams.optionA %></label>
+             </div>
+             <div>
+               <label><input type="radio" name="q<%=  i  %>"  value="<%= phyExams.optionB %>"  class="<%= phyExams.answer %>">(b) <%= phyExams.optionB %></label>
+             </div>
+             <div>
+               <label><input type="radio" name="q<%=  i  %>"  value="<%= phyExams.optionC %>"  class="<%= phyExams.answer %>">(c) <%= phyExams.optionC %></label>
+             </div>
+             <div>
+               <label><input type="radio" name="q<%=  i  %>"  value="<%= phyExams.optionD %>"  class="<%= phyExams.answer %>">(d) <%= phyExams.optionD %></label>
+             </div> 
+         </li>
+       </div>
+       <% } )%>
+   </ol>
+  </div>
+
+    </div>
+    <div class="col-3 bg-orange pt-5 container d-none d-lg-inline-block blur-this fixed">
+      <br>
+      <br>
+      <br>
+        <div class="bg-white text-dark w-75 ml-4 pt-2 pl-2 rounded shadow">
+          <ol class="row py-1">
+            <li class="col-1 btnToDiv" data-target="div0"></li>
+            <li class="col-1 btnToDiv" data-target="div1"></li>
+            <li class="col-1 btnToDiv" data-target="div2"></li>
+            <li class="col-1 btnToDiv" data-target="div3"></li>
+            <li class="col-1 btnToDiv" data-target="div4"></li>
+            <li class="col-1 btnToDiv" data-target="div5"></li>
+            <li class="col-1 btnToDiv" data-target="div6"></li>
+            <li class="col-1 btnToDiv" data-target="div7"></li>
+            <li class="col-1 btnToDiv" data-target="div8"></li>
+            <li class="col-1 btnToDiv" data-target="div9"></li>
+            <li class="col-1 btnToDiv" data-target="div10"></li>
+            <li class="col-1 btnToDiv" data-target="div11"></li>
+            <li class="col-1 btnToDiv" data-target="div12"></li>
+            <li class="col-1 btnToDiv" data-target="div13"></li>
+            <li class="col-1 btnToDiv" data-target="div14"></li>
+            <li class="col-1 btnToDiv" data-target="div15"></li>
+            <li class="col-1 btnToDiv" data-target="div16"></li>
+            <li class="col-1 btnToDiv" data-target="div17"></li>
+            <li class="col-1 btnToDiv" data-target="div18"></li>
+            <li class="col-1 btnToDiv" data-target="div19"></li>
+            <li class="col-1 btnToDiv" data-target="div20"></li>
+            <li class="col-1 btnToDiv" data-target="div21"></li>
+            <li class="col-1 btnToDiv" data-target="div22"></li>
+            <li class="col-1 btnToDiv" data-target="div23"></li>
+            <li class="col-1 btnToDiv" data-target="div24"></li>
+            <li class="col-1 btnToDiv" data-target="div25"></li>
+            <li class="col-1 btnToDiv" data-target="div26"></li>
+            <li class="col-1 btnToDiv" data-target="div27"></li>
+            <li class="col-1 btnToDiv" data-target="div28"></li>
+            <li class="col-1 btnToDiv" data-target="div29"></li>
+          </ol>
+        </div>
+        <div>
+          <a class="finish_button rounded text-light w-auto ml-5" onclick="calculate_score()"><strong>finish attempt</strong></a>
+        </div>
+    </div>
+</div>
+
+
+<%- include('partials/footerPhy.ejs') %>
