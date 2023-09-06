@@ -118,8 +118,8 @@ router.get('/exam/gns101/:name/result',isAdmin,(req,res)=>{
                   text-align: center;
                  }
                  .container{
-                  margin: 15%,25%;
-                  height: 500px;
+                  margin: 25%,25%;
+                  height: 50%;
                  }
                  .logo-sizing2{
                   height: 60px;
