@@ -7,7 +7,7 @@ var gns_seconds_time;
 var gns_minute_time;
 var countdown;
 var time=14;
-var T_time=650;
+var T_time=750;
 var N_question=30;
 $('.review').hide();
 

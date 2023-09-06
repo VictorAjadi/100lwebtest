@@ -7,7 +7,7 @@ var chm_seconds_time;
 var chm_minute_time;
 var countdown;
 var time=14;
-var T_time=700;
+var T_time=900;
 var N_question=30;
 $('.review').hide();
 

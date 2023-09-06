@@ -7,7 +7,7 @@ var phy_seconds_time;
 var phy_minute_time;
 var countdown;
 var time=14;
-var T_time=800;
+var T_time=1000;
 var N_question=30;
 $('.review').hide();
 
