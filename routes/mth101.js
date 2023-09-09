@@ -102,7 +102,7 @@ router.get('/exam/mth101/:name/result',isAdmin,(req,res)=>{
           res.redirect('/exam/generate-pdf/result')
         }else{
          (async () => {
-            const browser = await puppeteer.launch({ headless: 'new' }); // Specify headless: 'new'
+            const browser = await puppeteer.launch(); // Specify headless: 'new'
             const page = await browser.newPage();
           
             // Set the HTML content
