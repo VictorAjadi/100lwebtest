@@ -200,7 +200,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='http://192.168.0.173:3000/exam/gns/data/result'
+  const baseUrl='https://hgbc100lwebexam.onrender.com/exam/gns/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -251,5 +251,5 @@ console.log(error);
 
 }
 function load(){
-  window.location.href='http://192.168.0.173:3000/exam/instruction';
+  window.location.href='https://hgbc100lwebexam.onrender.com/exam/instruction';
 }
