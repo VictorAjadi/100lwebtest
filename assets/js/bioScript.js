@@ -11,7 +11,11 @@ var T_time=750;
 var N_question=30;
 $('.review').hide();
 
-slide_instruction();
+if($('.minutes').text() >= 15){
+  $('input[type="radio"]').attr('disabled', 'disabled');
+  $('.bio_submit_exam').css('background','gray');
+$('.bio_submit_exam').attr('disabled','disabled');
+};
 
 $('.btnToDiv').click(function() {
   // Get the target div ID from the 'data-target' attribute of the button
@@ -39,12 +43,14 @@ if (isButtonBioDisabled==="disabled") {
     $('.bio_submit_exam').prop("disabled", true);// Disable the button if it was previously disabled
 }
 //when subit button is clicked run this
-$('.bio_submit_exam').on('click',()=>{
+$('.bio_submit_exam').click(()=>{
+  run();
+  doThis();
   // Disable the button
   $('.bio_submit_exam').prop("disabled", true);
   // Store the disabled state in local storage
        localStorage.setItem('buttonBioDisabled', "disabled");
-       doThis();
+       load();
 });
 
 $('.on-logout').click(()=>{
@@ -60,6 +66,8 @@ $('.on-logout').click(()=>{
   $('.bio_submit_exam').prop("disabled", false);
   localStorage.removeItem('buttonBioDisabled');
 });
+
+slide_instruction();
 reviewCancel();
 
 function slide_instruction(){
@@ -105,13 +113,14 @@ function slide_instruction(){
   })
 };
 function calculate_score() {
-  doThis();
+  run();
   };
   function timer(){
     bio_seconds_time = parseInt(localStorage.getItem('bio_seconds_time')) || 0;
     bio_minute_time = parseInt(localStorage.getItem('bio_minute_time')) || 0;
      countdown=setInterval(() => {
         ++bio_seconds_time;
+        var keeper;
         if(bio_seconds_time < 10){
           seconds.text("0" + bio_seconds_time);
         }
@@ -138,6 +147,7 @@ function calculate_score() {
      seconds.text("00");
     //here run finish attempt
     reviewAftermath();
+    calculate_score();
     //load();
     clearInterval(countdown);
                 };

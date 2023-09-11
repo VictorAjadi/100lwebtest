@@ -144,7 +144,7 @@ function slide_instruction(){
   })
 };
 function calculate_score() {
-  doThis();
+  run();
   };
   function timer(){
     mth_seconds_time = parseInt(localStorage.getItem('mth_seconds_time')) || 0;
@@ -177,6 +177,7 @@ function calculate_score() {
      seconds.text("00");
     //here run finish attempt
     reviewAftermath();
+    calculate_score();
     //load();
     clearInterval(countdown);
                 };

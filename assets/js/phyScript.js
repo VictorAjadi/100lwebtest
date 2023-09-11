@@ -108,7 +108,7 @@ function slide_instruction(){
     })
 };
 function calculate_score() {
-doThis();
+run();
 };
 function timer(){
   phy_seconds_time = parseInt(localStorage.getItem('phy_seconds_time')) || 0;
@@ -142,6 +142,7 @@ function timer(){
    seconds.text("00");
   //here run finish attempt
   reviewAftermath();
+  calculate_score();
   //load();
   clearInterval(countdown);
               };

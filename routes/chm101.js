@@ -5,6 +5,8 @@ var express               =    require('express'),
     shuffle               =    require('shuffle-array'),
     questionData          =    require('../models/question'),
     puppeteer             =    require('puppeteer'),
+    fs                    =    require('fs'),
+    pdf                   =    require('html-pdf'),
     chm101                =    require('../models/chm101')
 
 //=====================================
@@ -95,20 +97,21 @@ router.post('/exam/chm/data/result', isLoggedIn, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-router.get('/exam/chm101/:name/result',isAdmin,(req,res)=>{
- console.log(req.params.name + ' chm101 result is being generated');
-       chm101.findOne({studentname: req.params.name, course: 'CHM101'})
-       .then((document)=>{
-        if(document.department===''){
-          req.flash('error','This student has not submitted or did not do the exam,kindly go back to exam page...........')
-          res.redirect('/exam/generate-pdf/result')
-        }else{
-         (async () => {
-            const browser = await puppeteer.launch({ headless: 'new' }); // Specify headless: 'new'
-            const page = await browser.newPage();
+router.get('/exam/chm101/:name/result', isAdmin, async (req, res) => {
+  console.log(req.params.name + ' chm101 result is being generated');
+  
+  try {
+    // Fetch the student document (replace this with your database logic)
+    const document = await chm101.findOne({ studentname: req.params.name, course: 'CHM101' });
+    
+    if (!document || document.department === '') {
+      req.flash('error', 'This student has not submitted or did not do the exam, kindly go back to the exam page...........');
+      res.redirect('/exam/generate-pdf/result');
+      return;
+    }
           
             // Set the HTML content
-            const content = `
+            const htmlContent = `
               <!DOCTYPE html>
               <html>
               <head>
@@ -148,25 +151,29 @@ router.get('/exam/chm101/:name/result',isAdmin,(req,res)=>{
               </html>
             `;
           
-            await page.setContent(content);
-          
-            // Generate PDF
-            const pdf = await page.pdf();
-          
-            // Close the browser
-            await browser.close();
-          
-            // Serve the PDF as a response
-            res.setHeader('Content-Disposition', `attachment; filename="${req.params.name}-chm101-result.pdf"`);
-            res.setHeader('Content-Type', 'application/pdf');
-            res.end(pdf);
-          })();
-        }
-       })
-         .catch(error=>{
-          req.flash('error','This student has not submitted or did not do the exam,kindly go back to exam page...........')
-          res.redirect('/exam/generate-pdf/result')
-         })  
+    // Options for the PDF generation
+    const pdfOptions = { format: 'A4' }; // You can specify page format and other options here
+
+    // Generate PDF from HTML content
+    pdf.create(htmlContent, pdfOptions).toBuffer((err, buffer) => {
+      if (err) {
+        console.error('Error generating PDF:', err);
+        res.status(500).send('Error generating PDF');
+      } else {
+        // Set response headers for PDF download
+        res.setHeader('Content-Disposition', `attachment; filename=${req.params.name}-chm101-result.pdf`);
+        res.setHeader('Content-Type', 'application/pdf');
+
+        // Send the PDF buffer as a response for download
+        res.send(buffer);
+      }
+    });
+
+  } catch (error) {
+    console.error('Error:', error);
+    req.flash('error', 'An error occurred while processing the request.');
+    res.redirect('/exam/generate-pdf/result');
+  }
 });
 router.post('/exam/generate-pdf/chm/result', isAdmin, (req, res) => {
  user.find()
