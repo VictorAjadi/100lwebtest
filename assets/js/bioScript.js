@@ -178,8 +178,8 @@ function reviewAftermath(){
   };
 }
 function doThis(){
-  // Reset timer values and clear localStorag
   run();
+  // Reset timer values and clear localStorag
   clearInterval(countdown);
   bio_seconds_time = 0;
   bio_minute_time = 15;
