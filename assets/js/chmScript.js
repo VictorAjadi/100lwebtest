@@ -236,7 +236,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='http://localhost:3000/exam/chm/data/result'
+  const baseUrl='https://hgbc100lwebexam.onrender.com/exam/chm/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -287,5 +287,5 @@ console.log(error);
 
 }
 function load(){
-  window.open('http://hgbc100lwebexam.onrender.com/exam/chm101/result');
+  window.open('https://hgbc100lwebexam.onrender.com/exam/chm101/result');
 }

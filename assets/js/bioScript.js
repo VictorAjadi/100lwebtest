@@ -252,5 +252,5 @@ console.log(error);
 
 }
 function load(){
-  window.open('http://hgbc100lwebexam.onrender.com/exam/bio101/result');
+  window.open('https://hgbc100lwebexam.onrender.com/exam/bio101/result');
 }
