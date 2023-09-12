@@ -11,10 +11,10 @@ var express               =    require('express'),
 //User Register Route
 //=====================
 
-router.get('/exam/register',isAdmin,(req,res)=>{
+router.get('/exam/register',(req,res)=>{
     res.render('register');
  });
- router.post('/exam/register',isAdmin,(req,res)=>{
+ router.post('/exam/register',(req,res)=>{
     department=req.body.department;
       user.register(new user({username: req.body.username,isAdmin: false,department: req.body.department}),req.body.password)
       .then(User=>{

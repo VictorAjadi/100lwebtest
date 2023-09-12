@@ -202,10 +202,10 @@ function doThis(){
   load();
 };
 function load(){
-  window.location.href='https://hgbc100lwebexam.onrender.com/exam/instruction';
+  window.open('http://localhost:3000/exam/phy101/result');
 }
 async function run(){
-  const baseUrl='https://hgbc100lwebexam.onrender.com/exam/phy/data/result'
+  const baseUrl='http://localhost:3000/exam/phy/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question

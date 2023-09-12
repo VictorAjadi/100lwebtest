@@ -20,6 +20,11 @@ body{
   height: 40px;
   width: 40px;
 }
+.logo-sizing-result{
+  height: 60px;
+  width: 60px;
+  margin-left: 50%;
+}
 shadow{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }

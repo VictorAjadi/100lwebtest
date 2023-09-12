@@ -95,6 +95,29 @@ router.post('/exam/mth/data/result', isLoggedIn, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+router.get('/exam/mth101/result',isLoggedIn,async (req, res) => {
+  console.log(req.user.username + ' mth101 result is being generated');
+  
+  try {
+    // Fetch the student document (replace this with your database logic)
+    const document = await mth101.findOne({studentname: req.user.username, course: 'MTH101' });
+    
+    if (!document || document.department === '') {
+      req.flash('error', 'This student has not submitted or did not do the exam, kindly go back to the exam page...........');
+      res.redirect('/exam/generate-pdf/result');
+      return;
+    }
+              
+   res.render('student_result',{document: document});
+
+  } catch (error) {
+    console.error('Error:', error);
+    req.flash('error', 'An error occurred while processing the request.');
+    res.redirect('/exam/instruction');
+  }
+ });
+
+/*
 router.get('/exam/mth101/:name/result', isAdmin, async (req, res) => {
   console.log(req.params.name + ' mth101 result is being generated');
   
@@ -173,6 +196,7 @@ router.get('/exam/mth101/:name/result', isAdmin, async (req, res) => {
     res.redirect('/exam/generate-pdf/result');
   }
 });
+*/
 router.post('/exam/generate-pdf/mth/result', isAdmin, (req, res) => {
  user.find()
    .then(User => {

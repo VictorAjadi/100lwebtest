@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs') %>
+<div class="my-5 text-center pt-3 container">
+    <% if(error && error.length > 0){%>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+     <% }else{ %>
+        <div class="alert alert-success" role="alert">
+            <p><%= userLoggedIn.username %> Result has been generated...........</p>
+          </div>
+    <%} %>
+  </div>
+
+  <div class="container2">
+  <img src="https://hgbcogbomoso.org/wp-content/uploads/2019/12/logosmall.png" class="logo-sizing-result" alt="">
+  <br>
+  <h1 class="text-center mb-3"><b>STUDENT  RESULT</b></h1>
+  <hr>
+  <div class="text-center">
+  <h3 class="my-2"><b>Student Name</b> : <span><%= userLoggedIn.username%></span></h3>
+  <br>
+  <h3 class="my-2"><b>Department</b> : <span><%=  document.department %></span></h3>
+  <br>
+  <h3 class="my-2"><b>Course</b> : <span><%=  document.course %></span></h3>
+  <br>
+  <h3 class="my-2"><b>Score</b> : <%=  document.score %> <span>/ 30</span></h3>
+  <br>
+  <h3 class="my-2"><b>Percentage</b> : <%=  (Math.round(((document.score)/30)*100)) %><span>%</span></h3>
+  <br>
+  <h3 class="my-2"><b>Grade</b> : <%=  document.grade %></h3>
+  <br>
+  </div>
+  <hr>
+  <br>
+</div>
+<%- include('partials/footer.ejs') %>

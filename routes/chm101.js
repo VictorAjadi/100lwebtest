@@ -97,84 +97,50 @@ router.post('/exam/chm/data/result', isLoggedIn, async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-router.get('/exam/chm101/:name/result', isAdmin, async (req, res) => {
-  console.log(req.params.name + ' chm101 result is being generated');
+router.get('/exam/chm101/result',isLoggedIn,async (req, res) => {
+  console.log(req.user.username + ' chm101 result is being generated');
   
   try {
     // Fetch the student document (replace this with your database logic)
-    const document = await chm101.findOne({ studentname: req.params.name, course: 'CHM101' });
+    const document = await chm101.findOne({studentname: req.user.username, course: 'CHM101' });
     
     if (!document || document.department === '') {
       req.flash('error', 'This student has not submitted or did not do the exam, kindly go back to the exam page...........');
       res.redirect('/exam/generate-pdf/result');
       return;
     }
-          
-            // Set the HTML content
-            const htmlContent = `
-              <!DOCTYPE html>
-              <html>
-              <head>
-              </head>
-              <body>
-              <style>
-                 .text-center{
-                  text-align: center;
-                 }
-                 .container{
-                  margin: 25%,25%;
-                  height: 50%;
-                 }
-                 .logo-sizing2{
-                  height: 60px;
-                  width: 60px;
-                  margin-left: 50%;
-                }
-              </style>
-              <div class="container">
-              <img src="https://hgbcogbomoso.org/wp-content/uploads/2019/12/logosmall.png" class="  logo-sizing2" alt="">
-              <br>
-              <h1 class="text-center"><b>STUDENT  RESULT</b></h1>
-              <hr>
-              <div class="text-center">
-              <h3 class=""><b>Student Name</b> : <span>${req.params.name}</span></h3>
-              <h3 class=""><b>Department</b> : <span>${document.department}</span></h3>
-              <h3 class=""><b>Course</b> : <span>${document.course}</span></h3>
-              <h3 class=""><b>Score</b> : ${document.score} <span>/ 30</span></h3>
-              <h3 class=""><b>Percentage</b> : ${(Math.round(((document.score)/30)*100))}<span>%</span></h3>
-              <h3 class=""><b>Grade</b> : ${document.grade}</h3>
-              </div>
-              <hr>
-              <br>
-          </div>
-              </body>
-              </html>
-            `;
-          
-    // Options for the PDF generation
-    const pdfOptions = { format: 'A4' }; // You can specify page format and other options here
-
-    // Generate PDF from HTML content
-    pdf.create(htmlContent, pdfOptions).toBuffer((err, buffer) => {
-      if (err) {
-        console.error('Error generating PDF:', err);
-        res.status(500).send('Error generating PDF');
-      } else {
-        // Set response headers for PDF download
-        res.setHeader('Content-Disposition', `attachment; filename=${req.params.name}-chm101-result.pdf`);
-        res.setHeader('Content-Type', 'application/pdf');
-
-        // Send the PDF buffer as a response for download
-        res.send(buffer);
-      }
-    });
+              
+   res.render('student_result',{document: document});
 
   } catch (error) {
     console.error('Error:', error);
     req.flash('error', 'An error occurred while processing the request.');
-    res.redirect('/exam/generate-pdf/result');
+    res.redirect('/exam/instruction');
   }
-});
+ });
+ router.post('/exam/generate-pdf/bio/result', isAdmin, (req, res) => {
+    user.find()
+      .then(User => {
+        let userFound = false;
+        User.forEach((users) => {
+          if (users.username === req.body.username) {
+            userFound = true;
+            req.flash('success', 'Student result is being generated....');
+            // Generate pdf route
+            res.redirect('/exam/bio101/' + users.username + '/result');
+          }
+        });
+  
+        // If no matching user found
+        if (!userFound) {
+          req.flash('error', 'Invalid Student Name....');
+          res.redirect('/exam/generate-pdf/result');
+        }
+      })
+      .catch(err => {
+        console.error('error founding user.........190');
+      });
+  });
 router.post('/exam/generate-pdf/chm/result', isAdmin, (req, res) => {
  user.find()
    .then(User => {

@@ -11,7 +11,11 @@ var T_time=750;
 var N_question=30;
 $('.review').hide();
 
-slide_instruction();
+if($('.minutes').text() >= 15){
+  $('input[type="radio"]').attr('disabled', 'disabled');
+  $('.gns_submit_exam').css('background','gray');
+$('.gns_submit_exam').attr('disabled','disabled');
+};
 
 $('.btnToDiv').click(function() {
   // Get the target div ID from the 'data-target' attribute of the button
@@ -31,7 +35,6 @@ $('.btnToDiv').click(function() {
   }, 800); // Adjust the animation duration as needed
   previous=targetPosition;
 });
-
 // Get a reference to your button
 // Check if the button is already disabled in local storage
 var isButtonGnsDisabled = localStorage.getItem('buttonGnsDisabled');
@@ -40,12 +43,14 @@ if (isButtonGnsDisabled==="disabled") {
     $('.gns_submit_exam').prop("disabled", true);// Disable the button if it was previously disabled
 }
 //when subit button is clicked run this
-$('.gns_submit_exam').on('click',()=>{
+$('.gns_submit_exam').click(()=>{
+  run();
+  doThis();
   // Disable the button
   $('.gns_submit_exam').prop("disabled", true);
   // Store the disabled state in local storage
        localStorage.setItem('buttonGnsDisabled', "disabled");
-       doThis();
+       load();
 });
 
 $('.on-logout').click(()=>{
@@ -56,13 +61,13 @@ $('.on-logout').click(()=>{
   minutes.text("00");
   $('.cancel').remove();
   $('input[type="radio"]').attr('disabled','disabled');
-  
   localStorage.setItem('gns_seconds_time',0);
   localStorage.setItem('gns_minute_time',0);
-
   $('.gns_submit_exam').prop("disabled", false);
-  localStorage.removeItem('buttonGnsDisabled');
+  localStorage.removeItem('buttonBioDisabled');
 });
+
+slide_instruction();
 reviewCancel();
 
 function slide_instruction(){
@@ -115,6 +120,7 @@ function calculate_score() {
     gns_minute_time = parseInt(localStorage.getItem('gns_minute_time')) || 0;
      countdown=setInterval(() => {
         ++gns_seconds_time;
+        var keeper;
         if(gns_seconds_time < 10){
           seconds.text("0" + gns_seconds_time);
         }
@@ -201,7 +207,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='https://hgbc100lwebexam.onrender.com/exam/gns/data/result'
+  const baseUrl='http://localhost:3000/exam/gns/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -252,5 +258,5 @@ console.log(error);
 
 }
 function load(){
-  window.location.href='https://hgbc100lwebexam.onrender.com/exam/instruction';
+  window.open('http://localhost:3000/exam/gns101/result');
 }
