@@ -3,19 +3,15 @@ var checkbox=$('#checkbox');
 var confirm_button=$('.instruction_button');
 var seconds=$('.seconds');
 var minutes=$('.minutes');
-var bio_seconds_time;
-var bio_minute_time;
+var gns_seconds_time;
+var gns_minute_time;
 var countdown;
 var time=14;
 var T_time=750;
 var N_question=30;
 $('.review').hide();
 
-if($('.minutes').text() >= 15){
-  $('input[type="radio"]').attr('disabled', 'disabled');
-  $('.bio_submit_exam').css('background','gray');
-$('.bio_submit_exam').attr('disabled','disabled');
-};
+slide_instruction();
 
 $('.btnToDiv').click(function() {
   // Get the target div ID from the 'data-target' attribute of the button
@@ -35,39 +31,38 @@ $('.btnToDiv').click(function() {
   }, 800); // Adjust the animation duration as needed
   previous=targetPosition;
 });
+
 // Get a reference to your button
 // Check if the button is already disabled in local storage
-var isButtonBioDisabled = localStorage.getItem('buttonBioDisabled');
+var isButtonGnsDisabled = localStorage.getItem('buttonGnsDisabled');
 
-if (isButtonBioDisabled==="disabled") {
-    $('.bio_submit_exam').prop("disabled", true);// Disable the button if it was previously disabled
+if (isButtonGnsDisabled==="disabled") {
+    $('.gns_submit_exam').prop("disabled", true);// Disable the button if it was previously disabled
 }
 //when subit button is clicked run this
-$('.bio_submit_exam').click(()=>{
-  run();
-  doThis();
+$('.gns_submit_exam').on('click',()=>{
   // Disable the button
-  $('.bio_submit_exam').prop("disabled", true);
+  $('.gns_submit_exam').prop("disabled", true);
   // Store the disabled state in local storage
-       localStorage.setItem('buttonBioDisabled', "disabled");
-       load();
+       localStorage.setItem('buttonGnsDisabled', "disabled");
+       doThis();
 });
 
 $('.on-logout').click(()=>{
   clearInterval(countdown);
-  bio_seconds_time = 0;
-  bio_minute_time = 0;
+  gns_seconds_time = 0;
+  gns_minute_time = 0;
   seconds.text("00");
   minutes.text("00");
   $('.cancel').remove();
   $('input[type="radio"]').attr('disabled','disabled');
-  localStorage.setItem('bio_seconds_time',0);
-  localStorage.setItem('bio_minute_time',0);
-  $('.bio_submit_exam').prop("disabled", false);
-  localStorage.removeItem('buttonBioDisabled');
-});
+  
+  localStorage.setItem('gns_seconds_time',0);
+  localStorage.setItem('gns_minute_time',0);
 
-slide_instruction();
+  $('.gns_submit_exam').prop("disabled", false);
+  localStorage.removeItem('buttonGnsDisabled');
+});
 reviewCancel();
 
 function slide_instruction(){
@@ -116,34 +111,33 @@ function calculate_score() {
   run();
   };
   function timer(){
-    bio_seconds_time = parseInt(localStorage.getItem('bio_seconds_time')) || 0;
-    bio_minute_time = parseInt(localStorage.getItem('bio_minute_time')) || 0;
+    gns_seconds_time = parseInt(localStorage.getItem('gns_seconds_time')) || 0;
+    gns_minute_time = parseInt(localStorage.getItem('gns_minute_time')) || 0;
      countdown=setInterval(() => {
-        ++bio_seconds_time;
-        var keeper;
-        if(bio_seconds_time < 10){
-          seconds.text("0" + bio_seconds_time);
+        ++gns_seconds_time;
+        if(gns_seconds_time < 10){
+          seconds.text("0" + gns_seconds_time);
         }
         else{
-          seconds.text(bio_seconds_time);
+          seconds.text(gns_seconds_time);
         };
         
         //when seconds count to 60 we want seconds to go back to 0 and as well increment minute
-          if (bio_seconds_time>=59){
-               bio_minute_time++;
-               bio_seconds_time=0;
+          if (gns_seconds_time>=59){
+               gns_minute_time++;
+               gns_seconds_time=0;
               //here we want to make sure minute prints in two digit
-                 if(bio_minute_time < 10){
-                    minutes.text("0" + bio_minute_time);
+                 if(gns_minute_time < 10){
+                    minutes.text("0" + gns_minute_time);
                    }
                   else{
-                    minutes.text(bio_minute_time);
+                    minutes.text(gns_minute_time);
                     };
     
                };
-               localStorage.setItem('bio_seconds_time', bio_seconds_time);
-               localStorage.setItem('bio_minute_time', bio_minute_time);
-    if(bio_minute_time>time){
+               localStorage.setItem('gns_seconds_time', gns_seconds_time);
+               localStorage.setItem('gns_minute_time', gns_minute_time);
+    if(gns_minute_time>time){
      seconds.text("00");
     //here run finish attempt
     reviewAftermath();
@@ -181,14 +175,14 @@ function doThis(){
   // Reset timer values and clear localStorag
   run();
   clearInterval(countdown);
-  bio_seconds_time = 0;
-  bio_minute_time = 15;
+  gns_seconds_time = 0;
+  gns_minute_time = 15;
   seconds.text("00");
   minutes.text("15");
   $('.cancel').remove();
   $('input[type="radio"]').attr('disabled','disabled');
-  localStorage.setItem('bio_seconds_time',0);
-  localStorage.setItem('bio_minute_time',15);
+  localStorage.setItem('gns_seconds_time',0);
+  localStorage.setItem('gns_minute_time',15);
 
   $('input[type="radio"]').on('change', function () {
     const name = $(this).attr('name');
@@ -207,7 +201,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='http://localhost:3000/exam/bio/data/result'
+  const baseUrl='https://localhost:3000/exam/bio/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -221,7 +215,7 @@ async function run(){
       score++;
     };
     if(score<6){
-      grade='F';     
+      grade='F';     g
     }else if(score>5 && score<11){
       grade='E';  
     }
@@ -247,8 +241,8 @@ try{
      'Content-Type': 'application/json'
    },
    body: JSON.stringify({
-    bioscore: score,
-    biograde: grade
+    gnsscore: score,
+    gnsgrade: grade
   })
   })
 }
