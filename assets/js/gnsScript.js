@@ -207,7 +207,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='http://localhost:3000/exam/gns/data/result'
+  const baseUrl='http://hgbc100lwebexam.onrender.com/exam/gns/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -258,5 +258,5 @@ console.log(error);
 
 }
 function load(){
-  window.open('http://localhost:3000/exam/gns101/result');
+  window.open('http://hgbc100lwebexam.onrender.com/exam/gns101/result');
 }

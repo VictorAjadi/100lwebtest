@@ -201,7 +201,7 @@ function doThis(){
   load();
 };
 async function run(){
-  const baseUrl='https://localhost:3000/exam/bio/data/result'
+  const baseUrl='https://hgbc100lwebexam.onrender.com/exam/bio/data/result'
   var score = 0;
   var grade='F';
   // Loop through each question
@@ -252,5 +252,5 @@ console.log(error);
 
 }
 function load(){
-  window.open('http://localhost:3000/exam/bio101/result');
+  window.open('http://hgbc100lwebexam.onrender.com/exam/bio101/result');
 }

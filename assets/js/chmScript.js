@@ -287,5 +287,5 @@ console.log(error);
 
 }
 function load(){
-  window.open('http://localhost:3000/exam/chm101/result');
+  window.open('http://hgbc100lwebexam.onrender.com/exam/chm101/result');
 }
